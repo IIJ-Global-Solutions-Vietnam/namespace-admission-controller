@@ -22,8 +22,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Build and push
-        uses: docker/bake-action@master
-        with:
-          push: true
-         env:
-          TAG: ${ steps.prep.outputs.tags }
+        run: |
+          TAG=${{ steps.prep.outputs.tags }}
+          docker buildx bake --push
