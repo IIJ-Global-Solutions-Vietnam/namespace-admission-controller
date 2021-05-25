@@ -1,12 +1,19 @@
 # namespace-admission-controller
 
-Rancherで管理されいてるkubernetesクラスターにおいて、kubectlで作成したnamespaceを自動的にProjectに割り当てるadmission controller
+## Install
 
-## mutating admission-controller
-
-- namespaceが作成された時にprojectを作成し、そのProjectIDをannotationとして付与するmutating-admission-controller
-
-## validating admission-controller
-
-- namespaceの作成がリクエストされた時に、そのユーザがProject作成の権限を持っているかどうかを確認し、持っていなければ弾くvalidating admission-controller
+- 1. Generate Rancher API Token
+  - Select 'no scope'
+- 2. Create value.yaml below.
+```yaml
+rancher:
+  clusterID: "your clusterID"
+  url: "your rancher API endpoint"
+  apiToken: "your Rancher API bearer Token"
+```
+- 3. Install with helm.
+```bash
+helm repo add higio https://raw.githubusercontent.com/IIJ-Global-Solutions-Vietnam/charts/gh-pages/
+helm install higio/namespace-admission-controller -f value.yaml
+```
 
