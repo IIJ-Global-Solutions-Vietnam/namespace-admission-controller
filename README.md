@@ -14,6 +14,6 @@ rancher:
 - 3. Install with helm.
 ```bash
 helm repo add higio https://raw.githubusercontent.com/IIJ-Global-Solutions-Vietnam/charts/gh-pages/
-helm install higio/namespace-admission-controller -f value.yaml
+helm install higio/namespace-admission-controller --generate-name -f value.yaml
 ```
 
