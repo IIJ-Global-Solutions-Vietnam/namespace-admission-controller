@@ -1,0 +1,9 @@
+.editorconfig
+.envrc
+.git
+.github
+.gitignore
+.idea
+LICENSE
+README.md
+docker-bake.hcl

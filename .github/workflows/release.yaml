@@ -19,7 +19,7 @@ jobs:
       - name: Build and push
         run: |
           TAG=${{ steps.prep.outputs.tags }}
-          docker login docker.pkg.github.com --username ${GITHUB_ACTOR} --password ${GITHUB_TOKEN}
+          docker login ghcr.io --username ${GITHUB_ACTOR} --password ${GITHUB_TOKEN}
           docker buildx bake --push
         env:
           GITHUB_ACTOR: ${{ github.actor }}

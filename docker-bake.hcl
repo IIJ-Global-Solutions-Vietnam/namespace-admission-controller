@@ -9,11 +9,11 @@ variable "TAG" {
 target "mutating-ac" {
     dockerfile = "mutating-ac/Dockerfile"
     context = "./"
-    tags = ["docker.pkg.github.com/iij-global-solutions-vietnam/namespace-admission-controller/mutating-ac:${TAG}"]
+    tags = ["ghcr.io/iij-global-solutions-vietnam/namespace-admission-controller/mutating-ac:${TAG}"]
 }
 
 target "validating-ac" {
     dockerfile = "validating-ac/Dockerfile"
     context = "./"
-    tags = ["docker.pkg.github.com/iij-global-solutions-vietnam/namespace-admission-controller/validating-ac:${TAG}"]
+    tags = ["ghcr.io/iij-global-solutions-vietnam/namespace-admission-controller/validating-ac:${TAG}"]
 }
