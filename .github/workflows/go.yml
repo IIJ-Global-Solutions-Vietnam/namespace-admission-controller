@@ -23,3 +23,18 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
+  dockerbuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build and push
+        run: |
+          docker login ghcr.io --username ${GITHUB_ACTOR} --password ${GITHUB_TOKEN}
+          docker buildx bake --push
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
