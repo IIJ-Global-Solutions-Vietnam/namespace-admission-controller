@@ -86,9 +86,15 @@ func (r *RancherClient) HasCreateProjectPermission(username string, userGroups [
 			"userId": username,
 		},
 	})
-	if globalRoleBindings != nil && err == nil {
+	if err != nil {
+		return false, err, fmt.Sprintf("Rancher GlobalRoleBindings List API failed. username=%s.", username)
+	}
+	if globalRoleBindings != nil {
 		for _, globalRoleBinding := range globalRoleBindings.Data {
-			globalRole, _ := r.client.GlobalRole.ByID(globalRoleBinding.GlobalRoleID)
+			globalRole, err := r.client.GlobalRole.ByID(globalRoleBinding.GlobalRoleID)
+			if err != nil {
+				return false, err, fmt.Sprintf("Rancher GlobalRole Get API failed. username=%s, globalRoleID=%s.", username, globalRoleBinding.GlobalRoleID)
+			}
 			for _, rule := range globalRole.Rules {
 				if (contains(rule.Resources, "projects") || contains(rule.Resources, "*")) && (contains(rule.Verbs, "*") || contains(rule.Verbs, "create")) {
 					return true, nil, ""
@@ -102,9 +108,15 @@ func (r *RancherClient) HasCreateProjectPermission(username string, userGroups [
 				"groupPrincipalId": userGroup,
 			},
 		})
-		if globalRoleBindings != nil && err == nil {
+		if err != nil {
+			return false, err, fmt.Sprintf("Rancher GlobalRoleBindings List API failed. username=%s.", username)
+		}
+		if globalRoleBindings != nil {
 			for _, globalRoleBinding := range globalRoleBindings.Data {
-				globalRole, _ := r.client.GlobalRole.ByID(globalRoleBinding.GlobalRoleID)
+				globalRole, err := r.client.GlobalRole.ByID(globalRoleBinding.GlobalRoleID)
+				if err != nil {
+					return false, err, fmt.Sprintf("Rancher GlobalRole Get API failed. username=%s, globalRoleID=%s.", username, globalRoleBinding.GlobalRoleID)
+				}
 				for _, rule := range globalRole.Rules {
 					if (contains(rule.Resources, "projects") || contains(rule.Resources, "*")) && (contains(rule.Verbs, "*") || contains(rule.Verbs, "create")) {
 						return true, nil, ""
@@ -142,7 +154,10 @@ func (r *RancherClient) HasCreateProjectPermission(username string, userGroups [
 				"groupPrincipalId": userGroup,
 			},
 		})
-		if clusterRoleBindings != nil && err == nil {
+		if err != nil {
+			return false, err, fmt.Sprintf("Rancher ClusterRoleBindings List API failed. username=%s.", username)
+		}
+		if clusterRoleBindings != nil {
 			for _, clusterRoleBinding := range clusterRoleBindings.Data {
 				clusterRole, _ := r.client.RoleTemplate.ByID(clusterRoleBinding.RoleTemplateID)
 				if err != nil {
