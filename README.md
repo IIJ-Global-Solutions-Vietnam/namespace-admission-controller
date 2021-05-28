@@ -19,14 +19,14 @@ helm install higio/namespace-admission-controller --generate-name -f value.yaml
 
 ## Require Permissions
 
-- The user that generate API Token must have below permissions.
+The user that generate API Token must have below permissions.
 
 | Reosurce | Verbs |
 | -------- | ----- |
-| GlobalRoles | List <br> Get |
-| GlobalRoleBindings | List <br> Get |
-| ClusterRoleTemplates | List <br> Get |
-| ClusterRoleTemplateBindings | List <br> Get |
-| ProjectRoleTemplates | List <br> Get |
-| ProjectRoleTemplateBindings | List <br> Get <br> Create |
-| Projects | List <br> Get <br> Create|
+| GlobalRoles | Get <br> List |
+| GlobalRoleBindings | Get <br> List |
+| ClusterRoleTemplates | Get <br> List |
+| ClusterRoleTemplateBindings | Get <br> List |
+| Projects | Get <br> List <br> Create |
+| ProjectRoleTemplates | Get <br> List |
+| ProjectRoleTemplateBindings | Get <br> List <br> Create |
