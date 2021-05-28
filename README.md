@@ -17,3 +17,30 @@ helm repo add higio https://raw.githubusercontent.com/IIJ-Global-Solutions-Vietn
 helm install higio/namespace-admission-controller --generate-name -f value.yaml
 ```
 
+## Require Permissions
+
+- The user that generate API Token must have below permissions.
+
+- GlobalRoles
+  - List
+  - Get
+- GlobalrRoleBindings
+  - List
+  - Get
+- ClusterRoles
+  - List
+  - Get
+- ClusterRoleTemplates
+  - List
+  - Get
+- ProjectRoleTemplate
+  - List
+  - Get
+- ProjectRoleTemplateBinding
+  - List
+  - Get
+  - Create
+- Projects
+  - List
+  - Get
+  - Create
