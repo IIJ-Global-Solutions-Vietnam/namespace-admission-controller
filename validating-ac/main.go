@@ -40,11 +40,13 @@ func (v *Validator) Validate(c context.Context, ar *kwhmodel.AdmissionReview, ob
 			Message: "object isn't namespace resource.",
 		}, nil
 	}
-	if ar.UserInfo.Username == consts.IgnoreUser {
-		return &kwhvalidating.ValidatorResult{
-			Valid:   true,
-			Message: "ok",
-		}, nil
+	for _, ignoreUser := range consts.IgnoreUsers {
+		if ar.UserInfo.Username == ignoreUser {
+			return &kwhvalidating.ValidatorResult{
+				Valid:   true,
+				Message: "ok",
+			}, nil
+		}
 	}
 
 	if ns.Annotations == nil {

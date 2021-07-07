@@ -27,7 +27,7 @@ type Mutator struct {
 
 const webhookID = "projectFieldAnnotate"
 
-func NewMutator (url string, token string, clusterID string) (*Mutator, error) {
+func NewMutator(url string, token string, clusterID string) (*Mutator, error) {
 	c, err := client.New(url, token, clusterID)
 	return &Mutator{
 		client: c,
@@ -40,8 +40,10 @@ func (m *Mutator) Mutate(_ context.Context, ar *kwhmodel.AdmissionReview, obj me
 		return &kwhmutating.MutatorResult{}, nil
 	}
 
-	if ar.UserInfo.Username == consts.IgnoreUser {
-		return &kwhmutating.MutatorResult{}, nil
+	for _, ignoreUser := range consts.IgnoreUsers {
+		if ar.UserInfo.Username == ignoreUser {
+			return &kwhmutating.MutatorResult{}, nil
+		}
 	}
 	if ns.Annotations == nil {
 		ns.Annotations = make(map[string]string)
@@ -76,7 +78,7 @@ func (m *Mutator) Mutate(_ context.Context, ar *kwhmodel.AdmissionReview, obj me
 					Warnings: []string{message},
 				}, err
 			}
-			if !hasPermission{
+			if !hasPermission {
 				kwhlogs.Warningf(message)
 				return &kwhmutating.MutatorResult{
 					Warnings: []string{message},
@@ -99,14 +101,13 @@ func (m *Mutator) Mutate(_ context.Context, ar *kwhmodel.AdmissionReview, obj me
 	}, nil
 }
 
-
 var kwhlogs kwhlog.Logger
 
 func run() error {
 	logrusLogEntry := logrus.NewEntry(logrus.New())
 	if config.Config.Debug {
 		logrusLogEntry.Logger.SetLevel(logrus.DebugLevel)
-	}else {
+	} else {
 		logrusLogEntry.Logger.SetLevel(logrus.InfoLevel)
 	}
 	logger := kwhlogrus.NewLogrus(logrusLogEntry)
@@ -147,7 +148,7 @@ func run() error {
 }
 
 func main() {
-	if err := run();err != nil {
+	if err := run(); err != nil {
 		fmt.Fprintf(os.Stderr, "error runnig app: %s", err)
 		os.Exit(1)
 	}
