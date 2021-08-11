@@ -9,9 +9,9 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"gitlab-vn.iij-globalps.jp/iij-k8s-team/namespace-admission-controller/client"
-	"gitlab-vn.iij-globalps.jp/iij-k8s-team/namespace-admission-controller/config"
-	"gitlab-vn.iij-globalps.jp/iij-k8s-team/namespace-admission-controller/consts"
+	"github.com/IIJ-Global-Solutions-Vietnam/namespace-admission-controller/client"
+	"github.com/IIJ-Global-Solutions-Vietnam/namespace-admission-controller/config"
+	"github.com/IIJ-Global-Solutions-Vietnam/namespace-admission-controller/consts"
 
 	"github.com/sirupsen/logrus"
 	kwhhttp "github.com/slok/kubewebhook/v2/pkg/http"

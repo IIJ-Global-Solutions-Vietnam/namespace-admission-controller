@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"gitlab-vn.iij-globalps.jp/iij-k8s-team/namespace-admission-controller/client"
-	"gitlab-vn.iij-globalps.jp/iij-k8s-team/namespace-admission-controller/config"
-	"gitlab-vn.iij-globalps.jp/iij-k8s-team/namespace-admission-controller/consts"
+	"github.com/IIJ-Global-Solutions-Vietnam/namespace-admission-controller/client"
+	"github.com/IIJ-Global-Solutions-Vietnam/namespace-admission-controller/config"
+	"github.com/IIJ-Global-Solutions-Vietnam/namespace-admission-controller/consts"
 	"net/http"
 	"os"
 

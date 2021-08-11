@@ -1,4 +1,4 @@
-module gitlab-vn.iij-globalps.jp/iij-k8s-team/namespace-admission-controller
+module github.com/IIJ-Global-Solutions-Vietnam/namespace-admission-controller
 
 go 1.16
 
