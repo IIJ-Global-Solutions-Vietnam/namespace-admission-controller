@@ -46,8 +46,7 @@ The user that generate API Token must have below permissions.
 | -------- | ----- |
 | GlobalRoles | Get <br> List |
 | GlobalRoleBindings | Get <br> List |
-| ClusterRoleTemplates | Get <br> List |
 | ClusterRoleTemplateBindings | Get <br> List |
 | Projects | Get <br> List <br> Create |
-| ProjectRoleTemplates | Get <br> List |
+| RoleTemplates | Get <br> List |
 | ProjectRoleTemplateBindings | Get <br> List <br> Create |
